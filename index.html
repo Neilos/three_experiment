@@ -3,6 +3,7 @@
 <head>
   <title>Three experiment</title>
   <script src="js/three.min.js"></script>
+  <script src="js/orbit_controls.js"></script>
 </head>
 <body>
 
@@ -28,6 +29,12 @@
       VIEW_ANGLE, ASPECT, NEAR, FAR
     );
     camera.position.z = 300;
+
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    //controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.enableZoom = false;
 
     var radius = 50;
     var segments = 20;
@@ -62,11 +69,18 @@
     render();
   }
 
+  function animate() {
+    requestAnimationFrame( animate );
+    controls.update();
+    render();
+  }
+
   function render() {
     renderer.render( scene, camera );
   }
 
   init();
+  animate();
 </script>
 
 </body>
