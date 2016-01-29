@@ -58,8 +58,12 @@
     pointLight.position.y = 10000;
     pointLight.position.z = 0;
 
+    // create some ambient light
+    ambientLight = new THREE.AmbientLight( 0x333333 );
+
     scene = new THREE.Scene();
     // add to the scene
+    scene.add(ambientLight);
     scene.add(camera);
     scene.add(sphere);
     scene.add(pointLight);
